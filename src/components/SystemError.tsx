@@ -41,7 +41,7 @@ export function SystemError({ onRecovered }: SystemErrorProps) {
       <span className="error-code mono">ERROR CODE: BRUHE-0xBEER</span>
       <h2 id="system-error-title" ref={heading} tabIndex={-1}>CRITICAL<br/><span>SYSTEM ERROR</span></h2>
       <div className="malfunction-label mono">CRITICAL MALFUNCTION</div>
-      <p id="beer-instruction" className="beer-instruction">Critical system malfunction. <strong>Add beer to reboot.</strong></p>
+      <p id="beer-instruction" className="beer-instruction"><strong>Add beer to reboot.</strong></p>
       <dl className="error-diagnostics mono">
         <div><dt>NEURAL RESPONSE:</dt><dd>DEGRADED</dd></div>
         <div><dt>MOTOR FUNCTIONS:</dt><dd>UNSTABLE</dd></div>

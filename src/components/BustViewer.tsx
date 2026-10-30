@@ -9,7 +9,6 @@ export function BustViewer({ config = settings.bust }: { config?: Config }) {
   const [ready, setReady] = useState(false);
   const [finished, setFinished] = useState(false);
   const [angle, setAngle] = useState(0);
-  const [retry, setRetry] = useState(0);
   useEffect(() => {
     let cancelled = false, raf = 0, previous = 0, drawn = -1, lastLabel = 0;
     const frames: (HTMLImageElement | undefined)[] = Array(config.frameCount);
@@ -58,7 +57,7 @@ export function BustViewer({ config = settings.bust }: { config?: Config }) {
     }
     raf = requestAnimationFrame(tick);
     return () => { cancelled = true; cancelAnimationFrame(raf); };
-  }, [config, retry]);
+  }, [config]);
   const rotate = (delta: number) => { engine.current.position += delta; engine.current.lastInput = performance.now(); };
   return <section className="biometric" aria-label="Interactive biometric reconstruction">
     <div className="view-top mono"><span><i className="dot"/> BIOMETRIC RECONSTRUCTION</span><span>01 / VISUAL</span></div>
@@ -81,7 +80,7 @@ export function BustViewer({ config = settings.bust }: { config?: Config }) {
       <div className="angle mono">Y / {String(angle).padStart(3,'0')}°<span>↔</span></div>
     </div>
     <div className="viewer-bottom mono"><span>{ready ? '↔ DRAG TO ROTATE' : finished ? 'AWAITING BIOMETRIC ASSETS' : 'CONNECTING TO CAPTURE…'}</span><span className="cyan">{ready ? 'SEQUENCE ACTIVE' : 'NO FACE DATA'}</span></div>
-    {finished && !ready && <button className="retry-assets mono" onClick={() => setRetry(n => n+1)}>RETRY CAPTURE CONNECTION ↻</button>}
+    <div className="system-stability mono" aria-label="Fictional system status"><i aria-hidden="true"/>ALL SYSTEMS STABLE</div>
     <div className="capture-progress" style={{'--progress': `${loaded/config.frameCount*100}%`} as CSSProperties}/>
   </section>;
 }
